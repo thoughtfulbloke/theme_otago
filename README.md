@@ -14,7 +14,7 @@ output:
 I am sharing my (unofficial) work-in-progress for creating R graph themes in Otago colours and fonts. To use them I suggest you download the repo and use a local copy, rather than trying to draw it in live from github, as this is an under development copy.
 
 These themes use Open Sans, as one of the recommended onscreen fonts, so you are going to need Open Sans (unless you modify the themes to something else).
-Open Sans is available at https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans and click on Family Selected the download downward pointing arrow in the upper right of the pop-up area.
+Open Sans is available at https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans and click on Family Selected in the lower right of the screen, then the download downward pointing arrow in the upper right of the pop-up area.
 
 ![Screenshot of Family selected download area](download_screenshot.png)
 
