@@ -1,22 +1,22 @@
-# Otago_theme
-
+---
+title: "Otago_theme"
+format: gfm
+editor: source
+---
 
 ## some notes on the Otago brand guide in R
 
-``` r
+```{r}
 library(ggplot2)
 library(ggtext)
 ```
 
-This is a very, very unofficial and informal set of notes of matching
-the University of Otago Brand Guide (so colours and fonts) in R, as of
-early September 2025.
-https://www.otago.ac.nz/marketing-services/resources/university-of-otago-brand-guide
+This is a very, very unofficial and informal set of notes of matching the University of Otago Brand Guide (so colours and fonts) in R, as of early September 2025. https://www.otago.ac.nz/marketing-services/resources/university-of-otago-brand-guide
 
-A list of defined colours (to give both the Māori and English names)
-might be
 
-``` r
+A list of defined colours (to give both the Māori and English names) might be
+
+```{r}
 unicol <- c("StAndrewsBlue" = "#060d87",
             "GoldRush" = "#f4b142",
             "Black" = "#000000",
@@ -45,7 +45,7 @@ unicol <- c("StAndrewsBlue" = "#060d87",
 
 With this setup colours can be referred to by count.
 
-``` r
+```{r}
 xmpldata <- data.frame(xis = c(1,2),
                          yis = c(1,2),
                          groupis = c("one","two"))
@@ -55,11 +55,9 @@ ggplot(xmpldata, aes(x=xis,y=yis,colour=groupis)) +
   scale_colour_manual(values=unname(unicol[c(1,3)]))
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-3-1.png)
-
 Or, ar times, referred to by name
 
-``` r
+```{r}
 xmpldata <- data.frame(xis = c(1,2),
                          yis = c(1,2),
                          groupis = c("one","two"))
@@ -68,13 +66,9 @@ ggplot(xmpldata, aes(x=xis,y=yis)) +
   geom_point(size=4, colour=unicol["RereTārewaKōura"]) 
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
+The standard university font is wickliffe (serif version). There are a number of different ways of handling fonts, this example uses the ggtext package.
 
-The standard university font is wickliffe (serif version). There are a
-number of different ways of handling fonts, this example uses the ggtext
-package.
-
-``` r
+```{r}
 ggplot(xmpldata, aes(x=xis,y=yis)) +
   geom_point(size=4, colour=unicol["RereTārewaKōura"]) +
   theme(axis.title.x = element_markdown(size = 18, 
@@ -83,14 +77,11 @@ ggplot(xmpldata, aes(x=xis,y=yis)) +
   xlab("x <b>i</b> s")
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-5-1.png)
-
-Now, themes are deeply a matter of personal opinion, but as a getting
-started, here is some options I like, as a basis for others customising.
+Now, themes are deeply a matter of personal opinion, but as a getting started, here is some options I like, as a basis for others customising.
 
 Without theme:
 
-``` r
+```{r}
 moredata <- data.frame(xis = c(1,2,3,4),
                          yis = c(1,2,1,2),
                          groupis = c("one","two","one","two"))
@@ -102,13 +93,13 @@ ggplot(moredata, aes(x=xis,y=yis, colour=groupis)) +
   labs(title = "An example title",
        subtitle = "An example subtitle",
        caption = "This is a caption")
-```
 
-![](README_files/figure-commonmark/unnamed-chunk-6-1.png)
+```
 
 And now with an example theme:
 
-``` r
+```{r}
+
 theme_oudh <- function(){
   theme_minimal(base_family="Wickliffe",
                 base_size = 10) %+replace%  
@@ -150,6 +141,7 @@ ggplot(moredata, aes(x=xis,y=yis, colour=groupis)) +
        y = "y axis title",
        x = "x axis title") +
   theme_oudh()
+
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
+
