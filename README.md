@@ -13,6 +13,8 @@ the University of Otago Brand Guide (so colours and fonts) in R, as of
 early September 2025.
 https://www.otago.ac.nz/marketing-services/resources/university-of-otago-brand-guide
 
+### Colours
+
 A list of defined colours (to give both the Māori and English names)
 might be
 
@@ -46,13 +48,16 @@ unicol <- c("StAndrewsBlue" = "#060d87",
 With this setup colours can be referred to by count.
 
 ``` r
-xmpldata <- data.frame(xis = c(1,2),
-                         yis = c(1,2),
-                         groupis = c("one","two"))
+xmpldata <- data.frame(xis = c(1,2,3,1,2,3,1,2,3,1,2,3),
+                         yis = c(1,2,3,3,3,2,4,3,2,1,4,2),
+                         groupis = c("one","one","one",
+                                     "two","two","two",
+                                     "three","three","three",
+                                     "four","four","four"))
 
 ggplot(xmpldata, aes(x=xis,y=yis,colour=groupis)) +
   geom_point(size=4) +
-  scale_colour_manual(values=unname(unicol[c(1,3)]))
+  scale_colour_manual(values=unname(unicol[c(1,2,7,8)]))
 ```
 
 ![](README_files/figure-commonmark/unnamed-chunk-3-1.png)
@@ -60,19 +65,17 @@ ggplot(xmpldata, aes(x=xis,y=yis,colour=groupis)) +
 Or, ar times, referred to by name
 
 ``` r
-xmpldata <- data.frame(xis = c(1,2),
-                         yis = c(1,2),
-                         groupis = c("one","two"))
-library(ggplot2)
 ggplot(xmpldata, aes(x=xis,y=yis)) +
   geom_point(size=4, colour=unicol["RereTārewaKōura"]) 
 ```
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
 
+### Font
+
 The standard university font is wickliffe (serif version). There are a
-number of different ways of handling fonts, this example uses the ggtext
-package.
+number of different ways of handling fonts, this example uses the
+ggtext() package.
 
 ``` r
 ggplot(xmpldata, aes(x=xis,y=yis)) +
@@ -85,20 +88,18 @@ ggplot(xmpldata, aes(x=xis,y=yis)) +
 
 ![](README_files/figure-commonmark/unnamed-chunk-5-1.png)
 
+### Themes
+
 Now, themes are deeply a matter of personal opinion, but as a getting
 started, here is some options I like, as a basis for others customising.
 
 Without theme:
 
 ``` r
-moredata <- data.frame(xis = c(1,2,3,4),
-                         yis = c(1,2,1,2),
-                         groupis = c("one","two","one","two"))
-
-ggplot(moredata, aes(x=xis,y=yis, colour=groupis)) +
+ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
   geom_point(size=2) +
   facet_wrap(~groupis, ncol=2) +
-  scale_colour_manual(name = "Data:", values=unname(unicol[c(1,2)])) +
+  scale_colour_manual(name = "Data:", values=unname(unicol[c(1,2,7,8)])) +
   labs(title = "An example title",
        subtitle = "An example subtitle",
        caption = "This is a caption")
@@ -140,10 +141,10 @@ theme_oudh <- function(){
           panel.spacing=unit(20, "points"))
 }
 
-ggplot(moredata, aes(x=xis,y=yis, colour=groupis)) +
+ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
   geom_point(size=2) +
   facet_wrap(~groupis, ncol=2) +
-  scale_colour_manual(name = "Data:", values=unname(unicol[c(1,2)])) +
+  scale_colour_manual(name = "Data:", values=unname(unicol[c(1,2,7,8)])) +
   labs(title = "An example title",
        subtitle = "An example subtitle",
        caption = "Source I put in the caption",
@@ -153,3 +154,65 @@ ggplot(moredata, aes(x=xis,y=yis, colour=groupis)) +
 ```
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
+
+### Ivory - Rei and facets
+
+The shade of Ivory - Rei is, in my opinion best used as a contrast
+colour to White - Mā where you want to distinguish two similar zones but
+have similarly effective dark colour contrast. In particular, I think a
+good use of it is to distinguish the panel area of the graph from the
+plot background by having the plot background (as above) which solves
+the “making it very clear what facets the titles apply to” problem faced
+by casual readers.
+
+But, an alternative that just accents with Ivory - Rei (so making the
+label contrast stronger but the facets less strongly set apart) is to
+use it in the strip title backgrounds and panel edging.
+
+``` r
+theme_uodh <- function(){
+  theme_minimal(base_family="Wickliffe",
+                base_size = 10) %+replace%  
+    theme(axis.line.x = element_line(linewidth=0.2),
+          axis.line.y = element_line(linewidth=0.2),
+          axis.ticks = element_line(linewidth=0.2),
+          axis.title.y.left = element_text(margin = margin(t = 5, r = 7, b = 5, l = 5, unit = "pt"),
+                                           size=12),
+          axis.title.x.bottom = element_text(margin = margin(t = 7, r = 5, b = 0, l = 5, unit = "pt"),
+                                             size=12),
+          panel.background = element_rect(fill = "#FFFFFF", colour = unicol["Rei"],
+                                          , linewidth=1),
+          panel.grid = element_blank(),
+          plot.title.position = "plot",
+          plot.title = element_text(lineheight = 1.18, size=14,
+                                    margin=margin(t = 5, r = 5, b = 10, l = 10, unit = "pt"),
+                                    hjust=0, vjust=0),
+          plot.subtitle = element_text(lineheight = 1.18, size=12,
+                                    margin=margin(t = 0, r = 5, b = 10, l = 10, unit = "pt"),
+                                    hjust=0),
+          plot.background = element_rect(fill = "#FFFFFF", colour="#FFFFFF"),
+          plot.caption = element_text(margin=margin(t = 2, r = 5, b = 5, l = 5, unit = "pt"),
+                                      lineheight = 1.15,
+                                      size=8, hjust=1),
+          plot.caption.position = "plot",
+          strip.background = element_rect(fill=unicol["Rei"], colour=unicol["Rei"],
+                                          linewidth=0.3),
+          strip.text = element_text(size=10,
+                                    margin=margin(t = 4, r = 8, b = 4, l = 8, unit = "pt")),
+          plot.margin = margin(t=10,r=10,b=10,l=10),
+          panel.spacing=unit(10, "points"))
+}
+
+ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
+  geom_point(size=2) +
+  facet_wrap(~groupis, ncol=2) +
+  scale_colour_manual(name = "Data:", values=unname(unicol[c(1,2,7,8)])) +
+  labs(title = "An example title",
+       subtitle = "An example subtitle",
+       caption = "Source I put in the caption",
+       y = "y axis title",
+       x = "x axis title") +
+  theme_uodh()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
