@@ -216,3 +216,36 @@ ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
 ```
 
 ![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
+
+### Colour palettes
+
+For 5 colour categorical (so priortising easy visual distinction), I
+(after checking a colour blindness simulator) suggest:
+
+- \#060D87 St Andrew’s Blue – Ōrangitea
+- \#EE8A07 Deep Gold – Kōura-Uri
+- \#317BFF True Blue – Kahurangi Tūturu
+- \#FFDE46 True Yellow – Kōwhai Tūturu
+- \#DAEBFC Sky – Kikorangi
+
+For a 5 colour discrete ordinal, as there are more blues I suggest:
+
+- \#000044 Deep Blue – Pukepoto
+- \#060d87 St Andrew’s Blue – Ōrangitea
+- \#317bff True Blue – Kahurangi Tūturu
+- \#daebfc Sky – Kikorangi
+- \#ffffff White – Mā (may need some thought around offset borders)
+
+Continious scale (in blue):
+
+- Sky – Kikorangi (#DAEBFC) to St Andrew’s Blue – Ōrangitea (#060d87)
+
+Continious scale (in orange):
+
+- True Yellow – Kōwhai Tūturu (#ffde46) to Deep Gold – Kōura-Uri
+  (#ee8a07)
+
+Diverging 3 colour scale:
+
+- St Andrew’s Blue – Ōrangitea (#060d87) to White – Mā (#ffffff) to Deep
+  Gold – Kōura-Uri (#ee8a07)
