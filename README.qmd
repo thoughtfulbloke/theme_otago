@@ -2,6 +2,9 @@
 title: "Otago_theme"
 format: gfm
 editor: source
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
 ---
 
 ## some notes on the Otago brand guide in R
@@ -78,6 +81,32 @@ ggplot(xmpldata, aes(x=xis,y=yis)) +
                                         colour=unicol["RereTārewaKōura"])) +
   xlab("x <b>i</b> s")
 ```
+
+More generally, it is worth noting that with the systemfonts package you can now register specific weights of fonts, getting acess to those weights where you could not previously (this example assumes ggplot2 4.0.0 or more recent, but read the systemfonts' "Using systemfonts to handle fonts in R" vignette)
+
+```{r}
+
+systemfonts::register_variant(
+  name = "Wickliffe Sans Light",
+  family = "Wickliffe Sans",
+  weight = "light"
+)
+
+systemfonts::register_variant(
+  name = "Wickliffe Sans Medium",
+  family = "Wickliffe Sans",
+  weight = "medium"
+)
+
+ggplot(xmpldata, aes(x=xis,y=yis)) +
+  geom_point(size=4, colour=unicol["RereTārewaKōura"]) +
+  labs(title="Main title",
+       subtitle = "here is a subtitle")+
+  theme_minimal(base_family = "Wickliffe Sans Light", 
+                header_family = "Wickliffe Sans Medium")
+
+```
+
 
 ### Themes
 

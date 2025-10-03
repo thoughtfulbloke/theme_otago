@@ -88,6 +88,35 @@ ggplot(xmpldata, aes(x=xis,y=yis)) +
 
 ![](README_files/figure-commonmark/unnamed-chunk-5-1.png)
 
+More generally, it is worth noting that with the systemfonts package you
+can now register specific weights of fonts, getting acess to those
+weights where you could not previously (this example assumes ggplot2
+4.0.0 or more recent, but read the systemfonts’ “Using systemfonts to
+handle fonts in R” vignette)
+
+``` r
+systemfonts::register_variant(
+  name = "Wickliffe Sans Light",
+  family = "Wickliffe Sans",
+  weight = "light"
+)
+
+systemfonts::register_variant(
+  name = "Wickliffe Sans Medium",
+  family = "Wickliffe Sans",
+  weight = "medium"
+)
+
+ggplot(xmpldata, aes(x=xis,y=yis)) +
+  geom_point(size=4, colour=unicol["RereTārewaKōura"]) +
+  labs(title="Main title",
+       subtitle = "here is a subtitle")+
+  theme_minimal(base_family = "Wickliffe Sans Light", 
+                header_family = "Wickliffe Sans Medium")
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-6-1.png)
+
 ### Themes
 
 Now, themes are deeply a matter of personal opinion, but as a getting
@@ -105,7 +134,7 @@ ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
        caption = "This is a caption")
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-6-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
 
 And now with an example theme:
 
@@ -153,7 +182,7 @@ ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
   theme_oudh()
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
 
 ### Ivory - Rei and facets
 
@@ -215,7 +244,7 @@ ggplot(xmpldata, aes(x=xis,y=yis, colour=groupis)) +
   theme_uodh()
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-9-1.png)
 
 ### Colour palettes
 
